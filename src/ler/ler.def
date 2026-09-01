@@ -1,0 +1,4 @@
+LIBRARY ler.dll
+EXPORTS
+    InitLocaleEmulator
+    UninitLocaleEmulator

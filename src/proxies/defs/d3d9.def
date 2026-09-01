@@ -1,0 +1,19 @@
+LIBRARY d3d9.dll
+EXPORTS
+    Direct3DCreate9 = Proxy_Direct3DCreate9 @37
+    Direct3DCreate9Ex = Proxy_Direct3DCreate9Ex @38
+    Direct3DCreate9On12 = Proxy_Direct3DCreate9On12 @20
+    Direct3DCreate9On12Ex = Proxy_Direct3DCreate9On12Ex @21
+    Direct3DShaderValidatorCreate9 = Proxy_Direct3DShaderValidatorCreate9 @24
+    D3DPERF_BeginEvent = Proxy_D3DPERF_BeginEvent @27
+    D3DPERF_EndEvent = Proxy_D3DPERF_EndEvent @28
+    D3DPERF_GetStatus = Proxy_D3DPERF_GetStatus @29
+    D3DPERF_QueryRepeatFrame = Proxy_D3DPERF_QueryRepeatFrame @30
+    D3DPERF_SetMarker = Proxy_D3DPERF_SetMarker @31
+    D3DPERF_SetOptions = Proxy_D3DPERF_SetOptions @32
+    D3DPERF_SetRegion = Proxy_D3DPERF_SetRegion @33
+    DebugSetLevel = Proxy_DebugSetLevel @34
+    DebugSetMute = Proxy_DebugSetMute @35
+    Direct3D9EnableMaximizedWindowedModeShim = Proxy_Direct3D9EnableMaximizedWindowedModeShim @36
+    PSGPError = Proxy_PSGPError @25
+    PSGPSampleTexture = Proxy_PSGPSampleTexture @26

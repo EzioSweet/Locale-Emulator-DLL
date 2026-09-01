@@ -1,0 +1,25 @@
+# Build artifacts
+build/
+bin/
+lib/
+*.obj
+*.o
+*.dll
+*.exe
+*.a
+*.lib
+*.exp
+
+# IDE & Editor files
+.vscode/
+.vs/
+.idea/
+*.user
+*.suo
+*.sln
+*.vcxproj*
+
+# System & Temp
+Thumbs.db
+Desktop.ini
+*.log
