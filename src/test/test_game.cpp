@@ -71,6 +71,17 @@ int main(void) {
     printf("  -> GetLocaleInfoA(LOCALE_USER_DEFAULT, LOCALE_IDEFAULTANSICODEPAGE) = \"%s\" (Expected: \"932\")\n", localeAcp);
     TEST_ASSERT(strcmp(localeAcp, "932") == 0, "GetLocaleInfoA returns \"932\"");
 
+    // Test 8b: GetLocaleInfoEx with LOCALE_NAME_USER_DEFAULT (NULL) and LOCALE_NAME_SYSTEM_DEFAULT (non-NULL)
+    WCHAR localeExAcp[16] = { 0 };
+    GetLocaleInfoEx(LOCALE_NAME_USER_DEFAULT, LOCALE_IDEFAULTANSICODEPAGE, localeExAcp, 16);
+    printf("  -> GetLocaleInfoEx(LOCALE_NAME_USER_DEFAULT, LOCALE_IDEFAULTANSICODEPAGE) = L\"%ls\" (Expected: L\"932\")\n", localeExAcp);
+    TEST_ASSERT(wcscmp(localeExAcp, L"932") == 0, "GetLocaleInfoEx(LOCALE_NAME_USER_DEFAULT) returns L\"932\"");
+
+    WCHAR localeExSysName[16] = { 0 };
+    GetLocaleInfoEx(LOCALE_NAME_SYSTEM_DEFAULT, LOCALE_SISO639LANGNAME, localeExSysName, 16);
+    printf("  -> GetLocaleInfoEx(LOCALE_NAME_SYSTEM_DEFAULT, LOCALE_SISO639LANGNAME) = L\"%ls\" (Expected: L\"ja\")\n", localeExSysName);
+    TEST_ASSERT(wcscmp(localeExSysName, L"ja") == 0, "GetLocaleInfoEx(LOCALE_NAME_SYSTEM_DEFAULT) redirects to L\"ja-JP\" without crashing");
+
     // Test 9: TimeZoneInformation
     TIME_ZONE_INFORMATION tzi;
     ZeroMemory(&tzi, sizeof(tzi));

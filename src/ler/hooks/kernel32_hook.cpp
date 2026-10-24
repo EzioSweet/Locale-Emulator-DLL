@@ -179,7 +179,8 @@ int WINAPI Hook_GetLocaleInfoW(LCID Locale, LCTYPE LCType, LPWSTR lpLCData, int 
 }
 
 int WINAPI Hook_GetLocaleInfoEx(LPCWSTR lpLocaleName, LCTYPE LCType, LPWSTR lpLCData, int cchData) {
-    if (!lpLocaleName || wcscmp(lpLocaleName, LOCALE_NAME_USER_DEFAULT) == 0 || wcscmp(lpLocaleName, LOCALE_NAME_SYSTEM_DEFAULT) == 0) {
+    // Note: LOCALE_NAME_USER_DEFAULT is defined as NULL in <winnls.h>, so !lpLocaleName covers it.
+    if (!lpLocaleName || wcscmp(lpLocaleName, LOCALE_NAME_SYSTEM_DEFAULT) == 0) {
         lpLocaleName = common::Config::Instance().locale_name().c_str();
     }
 
@@ -193,6 +194,17 @@ int WINAPI Hook_GetLocaleInfoEx(LPCWSTR lpLocaleName, LCTYPE LCType, LPWSTR lpLC
             return len;
         }
         wcscpy_s(lpLCData, cchData, acpStr);
+        return len;
+    }
+
+    if (baseType == common::LOCALE_IDEFAULTOEMCODEPAGE_CONST) {
+        wchar_t oemStr[16];
+        wsprintfW(oemStr, L"%u", common::Config::Instance().oem_code_page());
+        int len = static_cast<int>(wcslen(oemStr) + 1);
+        if (!lpLCData || cchData <= 0) {
+            return len;
+        }
+        wcscpy_s(lpLCData, cchData, oemStr);
         return len;
     }
 
